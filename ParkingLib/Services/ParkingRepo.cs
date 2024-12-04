@@ -1,4 +1,5 @@
-﻿using ParkingLib.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ParkingLib.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,9 @@ namespace ParkingLib.Services
             _parkingContext = new ParkingContext();
         }
 
-        public List<ParkedVehicle> GetAllActiveParkings()
+        public async Task<List<ParkedVehicle>> GetAllActiveParkings()
         {
-            return new List<ParkedVehicle>(_parkingContext.ParkedVehicles);
+            return await _parkingContext.ParkedVehicles.ToListAsync();
         }
         public ParkedVehicle CreateParking(ParkedVehicle ParkedObject)
         {
@@ -29,10 +30,10 @@ namespace ParkingLib.Services
             return ParkedObject;
         }
 
-        public ParkedVehicle GetParkingById(string LicensePlate)
+        public async Task<ParkedVehicle> GetParkingById(string LicensePlate)
         {
 
-            ParkedVehicle? vehicle = _parkingContext.ParkedVehicles.FirstOrDefault(v => v.LicensePlate == LicensePlate);
+            ParkedVehicle? vehicle = await _parkingContext.ParkedVehicles.FirstOrDefaultAsync(v => v.LicensePlate == LicensePlate);
 
             if (vehicle == null)
             {
@@ -41,9 +42,9 @@ namespace ParkingLib.Services
 
             return vehicle;
         }
-        public ParkedVehicle DeleteParking(string LicensePlate)
+        public async Task<ParkedVehicle> DeleteParking(string LicensePlate)
         {
-            ParkedVehicle vehicle = GetParkingById(LicensePlate);
+            ParkedVehicle vehicle = await GetParkingById(LicensePlate);
             _parkingContext.ParkedVehicles.Remove(vehicle);
             _parkingContext.SaveChanges();
             return vehicle;

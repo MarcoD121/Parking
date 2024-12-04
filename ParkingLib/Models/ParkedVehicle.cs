@@ -23,6 +23,11 @@ public partial class ParkedVehicle
 
     public virtual TimeForParkedVehicle ActiveParked { get; set; }
 
+    public ParkedVehicle()
+    {
+        
+    }
+
     public ParkedVehicle(string licensePlate, string make, string model, string color, int numberOfWheels, TimeForParkedVehicle activeParked)
     {
         LicensePlate = licensePlate;

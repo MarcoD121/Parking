@@ -18,6 +18,12 @@ namespace ParkingLib.Services
             _parkingContext = new ParkingContext();
         }
 
+        // Bruges til testing af DB.
+        public ParkingRepo(ParkingContext parkingContext)
+        {
+            _parkingContext = parkingContext;            
+        }
+
         public List<ParkedVehicle> GetAllActiveParkings()
         {
             return new List<ParkedVehicle>(_parkingContext.ParkedVehicles);

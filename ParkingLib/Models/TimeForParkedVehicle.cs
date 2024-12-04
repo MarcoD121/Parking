@@ -12,6 +12,12 @@ public partial class TimeForParkedVehicle
     public DateTime TimeStarted { get; set; }
 
     public virtual ICollection<ParkedVehicle> ParkedVehicles { get; set; } = new List<ParkedVehicle>();
+
+    public TimeForParkedVehicle()
+    {
+        
+    }
+
     public TimeForParkedVehicle(DateTime timeStarted)
     {
         TimeStarted = timeStarted;

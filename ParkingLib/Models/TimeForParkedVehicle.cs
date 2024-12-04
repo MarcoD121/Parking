@@ -17,7 +17,6 @@ public partial class TimeForParkedVehicle
     {
         
     }
-
     public TimeForParkedVehicle(DateTime timeStarted)
     {
         TimeStarted = timeStarted;

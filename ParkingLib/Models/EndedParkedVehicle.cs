@@ -7,6 +7,7 @@ namespace ParkingLib.Models;
 
 public partial class EndedParkedVehicle
 {
+
     public int VehicleId { get; set; }
 
     public int EndedParkedId { get; set; }
@@ -22,12 +23,10 @@ public partial class EndedParkedVehicle
     public int NumberOfWheels { get; set; }
 
     public virtual TimeForEndedVehicle EndedParked { get; set; }
-
     public EndedParkedVehicle()
     {
         
     }
-
     public EndedParkedVehicle(string licensePlate, string make, string model, string color, int numberOfWheels, TimeForEndedVehicle endedParked)
     {
         LicensePlate = licensePlate;
@@ -37,4 +36,5 @@ public partial class EndedParkedVehicle
         NumberOfWheels = numberOfWheels;
         EndedParked = endedParked;
     }
+
 }

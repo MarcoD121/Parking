@@ -22,15 +22,8 @@ namespace ParkingRest.Controllers
         [ProducesResponseType(400)]
         public async Task<ActionResult<List<ParkedVehicle>>> Get()
         {
-            try
-            {
                 var ListOfActiveParkings = await _parkingRepo.GetAllActiveParkings();
-                return Ok(ListOfActiveParkings);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+                return ListOfActiveParkings.Count() == 0 ? NotFound() : Ok(ListOfActiveParkings);   
         }
 
         // GET api/<ParkingsController>/5

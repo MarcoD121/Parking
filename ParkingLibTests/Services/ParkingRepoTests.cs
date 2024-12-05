@@ -19,7 +19,7 @@ namespace ParkingLib.Services.Tests
 
         private ParkingContext GetInSqlServerContext()
         {
-            var options = new DbContextOptionsBuilder<ParkingContext>().UseSqlServer("Data Source=mssql15.unoeuro.com;Initial Catalog=marcodybig_dk_db_travelagency;User ID = marcodybig_dk; Password=ek3bdfAmc4E9axGRnHFy;Connect Timeout = 30;Encrypt=True;TrustServerCertificate=True;ApplicationIntent = ReadWrite; MultiSubnetFailover=False").Options;
+            var options = new DbContextOptionsBuilder<ParkingContext>().UseSqlServer("Data Source=mssql2.unoeuro.com;Initial Catalog=abdiabbas_dk_db_databasetest;User ID=abdiabbas_dk;Password=F92enzdcEHRkyt5pbaAD;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False").Options;
 
             return new ParkingContext(options);
         }

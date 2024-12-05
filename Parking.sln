@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35410.144
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingLib", "ParkingLib\ParkingLib.csproj", "{E69557FF-0640-442F-8617-B4D48FD7DDD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingLib", "ParkingLib\ParkingLib.csproj", "{E69557FF-0640-442F-8617-B4D48FD7DDD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingLibTests", "ParkingLibTests\ParkingLibTests.csproj", "{0781AE30-C4B1-4550-BDAE-6B168DFDA032}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingRest", "ParkingRest\ParkingRest.csproj", "{0BE5D82A-E2E2-482F-96E1-8BC902A9014C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingRest", "ParkingRest\ParkingRest.csproj", "{0BE5D82A-E2E2-482F-96E1-8BC902A9014C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{E69557FF-0640-442F-8617-B4D48FD7DDD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E69557FF-0640-442F-8617-B4D48FD7DDD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E69557FF-0640-442F-8617-B4D48FD7DDD6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0781AE30-C4B1-4550-BDAE-6B168DFDA032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0781AE30-C4B1-4550-BDAE-6B168DFDA032}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0781AE30-C4B1-4550-BDAE-6B168DFDA032}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0781AE30-C4B1-4550-BDAE-6B168DFDA032}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0BE5D82A-E2E2-482F-96E1-8BC902A9014C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0BE5D82A-E2E2-482F-96E1-8BC902A9014C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BE5D82A-E2E2-482F-96E1-8BC902A9014C}.Release|Any CPU.ActiveCfg = Release|Any CPU

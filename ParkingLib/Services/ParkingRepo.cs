@@ -25,7 +25,7 @@ namespace ParkingLib.Services
             _parkingContext = parkingContext;            
         }
 
-        public List<ParkedVehicle> GetAllActiveParkings()
+        public async Task<List<ParkedVehicle>> GetAllActiveParkings()
         {
             return await _parkingContext.ParkedVehicles.ToListAsync();
         }

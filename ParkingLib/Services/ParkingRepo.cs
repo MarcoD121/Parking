@@ -39,7 +39,9 @@ namespace ParkingLib.Services
         public async Task<ParkedVehicle> GetParkingById(string LicensePlate)
         {
 
-            ParkedVehicle? vehicle = await _parkingContext.ParkedVehicles.FirstOrDefaultAsync(v => v.LicensePlate == LicensePlate);
+            ParkedVehicle? vehicle = await _parkingContext.ParkedVehicles.
+                Include(v => v.ActiveParked).
+                FirstOrDefaultAsync(v => v.LicensePlate == LicensePlate);
 
             if (vehicle == null)
             {

@@ -67,9 +67,18 @@ namespace ParkingRest.Controllers
         }
 
         // DELETE api/<ParkingsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{licenseplate}")]
+        public async Task<ActionResult> Delete(string licenseplate)
         {
+            try
+            {
+                var result = await _parkingRepo.DeleteParking(licenseplate);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException knfe)
+            {
+                return NotFound(knfe.Message);
+            }
         }
     }
 }

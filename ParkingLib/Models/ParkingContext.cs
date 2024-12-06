@@ -78,7 +78,7 @@ public partial class ParkingContext : DbContext
 
             entity.HasOne(d => d.ActiveParked).WithMany(p => p.ParkedVehicles)
                 .HasForeignKey(d => d.ActiveParkedId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientCascade)
                 .HasConstraintName("FK__ParkedVeh__Activ__2CF2ADDF");
         });
 

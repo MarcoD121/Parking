@@ -7,6 +7,7 @@ namespace ParkingRest.Model
         public static ParkedVehicle Convert(ParkedVehicleDTO dto)
         {
             ParkedVehicle vehicle = new ParkedVehicle();
+            TimeForParkedVehicle time = new TimeForParkedVehicle();
 
             vehicle.LicensePlate = dto.licensePlate;
             vehicle.Make = dto.make;
@@ -15,7 +16,7 @@ namespace ParkingRest.Model
             vehicle.NumberOfWheels = dto.numberOfWheels;
             vehicle.ActiveParked = new TimeForParkedVehicle
             {
-                TimeStarted = dto.activeParked.TimeStarted
+                TimeStarted = dto.dateTime
             };
 
             return vehicle;

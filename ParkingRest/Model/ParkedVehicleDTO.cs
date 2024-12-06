@@ -2,5 +2,5 @@
 
 namespace ParkingRest.Model
 {
-    public record ParkedVehicleDTO(string licensePlate, string make, string model, string color, int numberOfWheels, TimeForParkedVehicle activeParked);
+    public record ParkedVehicleDTO(string licensePlate, string make, string model, string color, int numberOfWheels, DateTime dateTime);
 }

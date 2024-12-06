@@ -10,6 +10,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(new ParkingRepo());
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAny",
+    builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+);
+    options.AddPolicy("AllowSpecificOrigin",
+    builder => builder.WithOrigins("http://zealand.dk").AllowAnyHeader().AllowAnyMethod()
+    );
+    options.AddPolicy("AllowOnlyGetPut",
+   builder => builder.AllowAnyOrigin().AllowAnyHeader().WithMethods("Get", "Put")
+   );
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +35,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("AllowAny");
 
 app.MapControllers();
 

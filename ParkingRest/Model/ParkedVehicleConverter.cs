@@ -13,6 +13,10 @@ namespace ParkingRest.Model
             vehicle.Model = dto.model;
             vehicle.Color = dto.color;
             vehicle.NumberOfWheels = dto.numberOfWheels;
+            vehicle.ActiveParked = new TimeForParkedVehicle
+            {
+                TimeStarted = dto.activeParked.TimeStarted
+            };
 
             return vehicle;
         }

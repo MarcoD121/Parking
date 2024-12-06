@@ -22,7 +22,7 @@ namespace ParkingLib.Services
         // Bruges til testing af DB.
         public ParkingRepo(ParkingContext parkingContext)
         {
-            _parkingContext = parkingContext;            
+            _parkingContext = parkingContext;
         }
 
         public async Task<List<ParkedVehicle>> GetAllActiveParkings()

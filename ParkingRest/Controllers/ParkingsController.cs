@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ParkingLib.Models;
 using ParkingLib.Services;
+using ParkingRest.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -43,8 +44,20 @@ namespace ParkingRest.Controllers
 
         // POST api/<ParkingsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] ParkedVehicleDTO dto)
         {
+            try
+            {
+                ParkedVehicle vehicle = ParkedVehicleConverter.Convert(dto);
+                return Ok(_parkingRepo.CreateParking(vehicle));
+
+            }
+            catch (ArgumentException ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // PUT api/<ParkingsController>/5

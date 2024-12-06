@@ -34,7 +34,8 @@ namespace ParkingRest.Controllers
             try
             {
                 var result = await _parkingRepo.GetParkingById(licenseplate);
-                return Ok(result);
+                var resultDTO = new ParkedVehicleDTO(result.LicensePlate, result.Make, result.Model, result.Color, result.NumberOfWheels, result.ActiveParked.TimeStarted);
+                return Ok(resultDTO);
             }
             catch (KeyNotFoundException ex)
             {

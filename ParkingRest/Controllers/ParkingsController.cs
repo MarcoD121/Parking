@@ -47,11 +47,12 @@ namespace ParkingRest.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] ParkedVehicleDTO dto)
         {
+            // kald til motorAPI post(lisence plate)
+            // data returneres fra motorAPI og lægges over i et parkedvehicle objekt
             try
             {
                 ParkedVehicle vehicle = ParkedVehicleConverter.Convert(dto);
                 return Ok(_parkingRepo.CreateParking(vehicle));
-
             }
             catch (ArgumentException ex)
             {

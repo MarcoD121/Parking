@@ -23,7 +23,7 @@ namespace ParkingRest.Controllers
         [ProducesResponseType(400)]
         public async Task<ActionResult<List<ParkedVehicle>>> Get()
         {
-                var ListOfActiveParkings = await _parkingRepo.GetAllActiveParkings();
+                var ListOfActiveParkings = await _parkingRepo.GetSqlList();
                 return ListOfActiveParkings.Count() == 0 ? NotFound() : Ok(ListOfActiveParkings);   
         }
 

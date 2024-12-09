@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using ParkingLib.Models;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,32 @@ namespace ParkingLib.Services
         {
             _parkingContext = parkingContext;
         }
+
+
+        public async Task<List<ParkedVehicle>> GetSqlList()
+        {
+            List<ParkedVehicle> list = new List<ParkedVehicle>();
+            string query = "SELECT p.Vehicle_Id, p.ActiveParked_Id, p.LicensePlate, p.Make, p.Model, p.Color, p.NumberOfWheels, TFPV.TimeStarted FROM ParkedVehicles as p INNER JOIN TimeForParkedVehicles as TFPV ON p.ActiveParked_Id = TFPV.ActiveParked_Id";
+
+            using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
+            {
+                await connection.OpenAsync();
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync()) 
+                    {
+                        while (await reader.ReadAsync()) 
+                        {
+                            ParkedVehicle parkedVehicle = ReadObject(reader);
+                            list.Add(parkedVehicle);
+                        }
+                    }
+                }
+            }
+
+            return list;
+        }
+
 
         public async Task<List<ParkedVehicle>> GetAllActiveParkings()
         {
@@ -56,6 +83,23 @@ namespace ParkingLib.Services
             _parkingContext.ParkedVehicles.Remove(vehicle);
             _parkingContext.SaveChanges();
             return vehicle;
+        }
+
+        private ParkedVehicle ReadObject(SqlDataReader reader)
+        {
+            ParkedVehicle parkedVehicle = new ParkedVehicle();
+            TimeForParkedVehicle parkedTime = new TimeForParkedVehicle();
+            parkedVehicle.VehicleId = reader.GetInt32(0);
+            parkedVehicle.ActiveParkedId = reader.GetInt32(1);
+            parkedVehicle.LicensePlate = reader.GetString(2);
+            parkedVehicle.Make = reader.GetString(3);
+            parkedVehicle.Model = reader.GetString(4);
+            parkedVehicle.Color = reader.GetString(5);
+            parkedVehicle.NumberOfWheels = reader.GetInt32(6);
+            parkedTime.TimeStarted = reader.GetDateTime(7);
+
+            return parkedVehicle;
+
         }
     }
 }

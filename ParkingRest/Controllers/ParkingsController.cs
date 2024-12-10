@@ -18,13 +18,23 @@ namespace ParkingRest.Controllers
         }
 
         // GET: api/<ParkingsController>
-        [HttpGet]
+        [HttpGet("ActiveParkings")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<List<ParkedVehicle>>> Get()
+        public async Task<ActionResult<List<ParkedVehicle>>> GetActiveParkings()
         {
-                var ListOfActiveParkings = await _parkingRepo.GetSqlList();
+                var ListOfActiveParkings = await _parkingRepo.GetActiveParkings();
                 return ListOfActiveParkings.Count() == 0 ? NotFound() : Ok(ListOfActiveParkings);   
+        }
+
+        // GET: api/<ParkingsController>
+        [HttpGet("EndedParkings")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<List<EndedParkedVehicle>>> GetEndedParkings()
+        {
+            var ListOfEndedParkings = await _parkingRepo.GetEndedParkings();
+            return ListOfEndedParkings.Count() == 0 ? NotFound() : Ok(ListOfEndedParkings);
         }
 
         // GET api/<ParkingsController>/5

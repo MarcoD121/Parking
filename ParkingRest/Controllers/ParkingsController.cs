@@ -49,8 +49,6 @@ namespace ParkingRest.Controllers
         {
             APIClient client = new APIClient();
             var result = await client.LicensePlateInformationAsync(licensePlate);
-            // kald til motorAPI post(lisence plate)
-            // data returneres fra motorAPI og lægges over i et parkedvehicle objekt
             try
             {
                 return Ok(_parkingRepo.CreateParking(result));

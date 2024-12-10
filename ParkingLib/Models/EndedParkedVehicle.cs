@@ -21,19 +21,21 @@ public partial class EndedParkedVehicle
     public string Color { get; set; }
 
     public int NumberOfWheels { get; set; }
+    public string Type { get; set; }
 
     public virtual TimeForEndedVehicle EndedParked { get; set; }
     public EndedParkedVehicle()
     {
         
     }
-    public EndedParkedVehicle(string licensePlate, string make, string model, string color, int numberOfWheels, TimeForEndedVehicle endedParked)
+    public EndedParkedVehicle(string licensePlate, string make, string model, string color, int numberOfWheels, string type, TimeForEndedVehicle endedParked)
     {
         LicensePlate = licensePlate;
         Make = make;
         Model = model;
         Color = color;
         NumberOfWheels = numberOfWheels;
+        Type = type;
         EndedParked = endedParked;
     }
 

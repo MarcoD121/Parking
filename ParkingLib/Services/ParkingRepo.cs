@@ -81,13 +81,6 @@ namespace ParkingLib.Services
         {
             ParkedVehicle vehicle = await GetParkingById(LicensePlate);
 
-            var timeRecord = await _parkingContext.TimeForParkedVehicles.FirstOrDefaultAsync(v => v.ActiveParkedId == vehicle.ActiveParkedId);
-
-            if (timeRecord != null)
-            {
-                _parkingContext.TimeForParkedVehicles.Remove(timeRecord);
-            }
-
             _parkingContext.ParkedVehicles.Remove(vehicle);
             _parkingContext.SaveChanges();
             return vehicle;

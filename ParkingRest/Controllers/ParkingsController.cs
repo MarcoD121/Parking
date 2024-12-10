@@ -45,14 +45,15 @@ namespace ParkingRest.Controllers
 
         // POST api/<ParkingsController>
         [HttpPost]
-        public IActionResult Post([FromBody] ParkedVehicleDTO dto)
+        public async Task<ActionResult> Post([FromBody] string licensePlate)
         {
+            APIClient client = new APIClient();
+            var result = await client.LicensePlateInformationAsync(licensePlate);
             // kald til motorAPI post(lisence plate)
             // data returneres fra motorAPI og lægges over i et parkedvehicle objekt
             try
             {
-                ParkedVehicle vehicle = ParkedVehicleConverter.Convert(dto);
-                return Ok(_parkingRepo.CreateParking(vehicle));
+                return Ok(_parkingRepo.CreateParking(result));
             }
             catch (ArgumentException ex)
             {

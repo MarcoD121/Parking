@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ParkingLib.Models;
 
@@ -11,6 +12,7 @@ public partial class ParkedVehicle
 
     public int ActiveParkedId { get; set; }
 
+    [JsonPropertyName("registration_number")]
     public string LicensePlate { get; set; }
 
     public string Make { get; set; }
@@ -20,6 +22,7 @@ public partial class ParkedVehicle
     public string Color { get; set; }
 
     public int NumberOfWheels { get; set; }
+    public string Type { get; set; }
 
     public virtual TimeForParkedVehicle ActiveParked { get; set; }
 
@@ -28,13 +31,14 @@ public partial class ParkedVehicle
         
     }
 
-    public ParkedVehicle(string licensePlate, string make, string model, string color, int numberOfWheels, TimeForParkedVehicle activeParked)
+    public ParkedVehicle(string licensePlate, string make, string model, string color, int numberOfWheels, string type , TimeForParkedVehicle activeParked)
     {
         LicensePlate = licensePlate;
         Make = make;
         Model = model;
         Color = color;
         NumberOfWheels = numberOfWheels;
+        Type = type;
         ActiveParked = activeParked;
     }
 }

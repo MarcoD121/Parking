@@ -86,6 +86,30 @@ namespace ParkingLib.Services
             return ParkedObject;
         }
 
+        public async Task<EndedParkedVehicle> EndParking(string licenseplate)
+        {
+            var ParkedObject = await GetParkingById(licenseplate);
+
+            TimeSpan totaltime = DateTime.Now - ParkedObject.ActiveParked.TimeStarted;
+            DateTime baseDateTime = new DateTime(2000, 1, 1);
+            DateTime totaltimeDateTime = baseDateTime + totaltime;
+            EndedParkedVehicle EndedObject = new EndedParkedVehicle
+            {
+                LicensePlate = ParkedObject.LicensePlate,
+                Make = ParkedObject.Make,
+                Model = ParkedObject.Model,
+                Color = ParkedObject.Color,
+                NumberOfWheels = ParkedObject.NumberOfWheels,
+                Type = ParkedObject.Type,
+                EndedParked = new TimeForEndedVehicle(ParkedObject.ActiveParked.TimeStarted,DateTime.Now, totaltimeDateTime)
+            };
+            _parkingContext.EndedParkedVehicles.Add(EndedObject);
+            _parkingContext.ParkedVehicles.Remove(ParkedObject);
+            _parkingContext.SaveChanges();
+
+            return EndedObject;
+        }
+
         public async Task<ParkedVehicle> GetParkingById(string LicensePlate)
         {
 
@@ -130,6 +154,7 @@ namespace ParkingLib.Services
         {
             EndedParkedVehicle endedParkedVehicle = new EndedParkedVehicle();
             TimeForEndedVehicle parkedTime = new TimeForEndedVehicle();
+            endedParkedVehicle.EndedParked = parkedTime;
             endedParkedVehicle.VehicleId = reader.GetInt32(0);
             endedParkedVehicle.EndedParkedId = reader.GetInt32(1);
             endedParkedVehicle.LicensePlate = reader.GetString(2);

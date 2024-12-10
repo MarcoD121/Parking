@@ -72,9 +72,15 @@ namespace ParkingRest.Controllers
         }
 
         // PUT api/<ParkingsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("EndParking{licenseplate}")]
+        public async Task<ActionResult> EndParking(string licenseplate)
         {
+            var result = await _parkingRepo.EndParking(licenseplate);
+            if (result != null)
+            {
+            return Ok(result);
+            }
+            return NotFound();
         }
 
         // DELETE api/<ParkingsController>/5

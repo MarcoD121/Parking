@@ -55,10 +55,10 @@ namespace ParkingRest.Controllers
 
         // POST api/<ParkingsController>
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] string licensePlate, string datetime)
+        public async Task<ActionResult> Post([FromBody] ParkingRequestDTO request)
         {
             APIClient client = new APIClient();
-            var result = await client.LicensePlateInformationAsync(licensePlate);
+            var result = await client.LicensePlateInformationAsync(request.LicensePlate);
             try
             {
                 return Ok(_parkingRepo.CreateParking(result));

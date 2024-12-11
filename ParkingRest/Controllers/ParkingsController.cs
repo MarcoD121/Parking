@@ -55,7 +55,7 @@ namespace ParkingRest.Controllers
 
         // POST api/<ParkingsController>
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] string licensePlate)
+        public async Task<ActionResult> Post([FromBody] string licensePlate, string datetime)
         {
             APIClient client = new APIClient();
             var result = await client.LicensePlateInformationAsync(licensePlate);
@@ -73,7 +73,7 @@ namespace ParkingRest.Controllers
 
         // PUT api/<ParkingsController>/5
         [HttpPut("EndParking{licenseplate}")]
-        public async Task<ActionResult> EndParking(string licenseplate)
+        public async Task<ActionResult> EndParking(string licenseplate, string datetime)
         {
             var result = await _parkingRepo.EndParking(licenseplate);
             if (result != null)

@@ -137,6 +137,7 @@ namespace ParkingLib.Services
         {
             ParkedVehicle parkedVehicle = new ParkedVehicle();
             TimeForParkedVehicle parkedTime = new TimeForParkedVehicle();
+            parkedVehicle.ActiveParked = parkedTime;
             parkedVehicle.VehicleId = reader.GetInt32(0);
             parkedVehicle.ActiveParkedId = reader.GetInt32(1);
             parkedVehicle.LicensePlate = reader.GetString(2);

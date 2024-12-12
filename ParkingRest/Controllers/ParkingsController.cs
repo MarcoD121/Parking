@@ -57,11 +57,16 @@ namespace ParkingRest.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ParkingRequestDTO request)
         {
-            APIClient client = new APIClient();
-            var result = await client.LicensePlateInformationAsync(request.LicensePlate);
             try
             {
-                return Ok(_parkingRepo.CreateParking(result));
+                APIClient client = new APIClient();
+                var result = await client.LicensePlateInformationAsync(request.LicensePlate);
+                if (result != null) 
+                {
+                    var carparked = _parkingRepo.CreateParking(result);
+                    return Ok(carparked);
+                }
+                return BadRequest();
             }
             catch (ArgumentException ex)
             {
@@ -72,13 +77,21 @@ namespace ParkingRest.Controllers
         }
 
         // PUT api/<ParkingsController>/5
-        [HttpPut("EndParking{licenseplate}")]
-        public async Task<ActionResult> EndParking(string licenseplate, [FromBody] ParkingRequestDTO request)
+        [HttpPut("{licenseplate}")]
+        public async Task<ActionResult> EndParking(string licenseplate)
         {
+            try
+            {
             var result = await _parkingRepo.EndParking(licenseplate);
             if (result != null)
             {
             return Ok(result);
+            }
+            }
+            catch (KeyNotFoundException ex)
+            {
+
+                return NotFound(ex.Message);
             }
             return NotFound();
         }

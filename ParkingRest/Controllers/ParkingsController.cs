@@ -72,7 +72,7 @@ namespace ParkingRest.Controllers
         }
 
         // PUT api/<ParkingsController>/5
-        [HttpPut("EndParking{licenseplate}")]
+        [HttpPut("{licenseplate}")]
         public async Task<ActionResult> EndParking(string licenseplate)
         {
             var result = await _parkingRepo.EndParking(licenseplate);

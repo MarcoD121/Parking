@@ -41,10 +41,49 @@ namespace ParkingLibTests.Services
             string actualBtnText = button.Text;
 
             Assert.AreEqual("Login", actualBtnText);
+            TearDown();
 
             //button.Click();
             // Assert.AreEqual(driver.Url, "https://www.selenium.dev/");
         }
+        [TestMethod]
+        public void TestLogudButtonExist()
+        {
+            IWebElement input1 = driver.FindElement(By.Id("brugernavnTest"));
+            input1.SendKeys("Admin");
+
+            IWebElement input2 = driver.FindElement(By.Id("passwordTest"));
+            input2.SendKeys("123");
+
+            IWebElement button = driver.FindElement(By.Id("loginTest"));
+            button.Click();
+
+            IWebElement buttonLogOut = driver.FindElement(By.Id("logudTest"));
+
+            string actualBtnText = buttonLogOut.Text;
+            Assert.AreEqual("Log ud", actualBtnText);
+
+        }
+
+
+        [TestMethod]
+        public void TestSeParkeringerButtonExist()
+        {
+            IWebElement input1 = driver.FindElement(By.Id("brugernavnTest"));
+            input1.SendKeys("Admin");
+
+            IWebElement input2 = driver.FindElement(By.Id("passwordTest"));
+            input2.SendKeys("123");
+
+            IWebElement button = driver.FindElement(By.Id("loginTest"));
+            button.Click();
+
+            IWebElement seTidligereParkering = driver.FindElement(By.Id("seTidligereParkeringerTest"));
+
+            string actualBtnText = seTidligereParkering.Text;
+            Assert.AreEqual("Se tidligere parkeringer", actualBtnText);
+        }
+
 
     }
 }

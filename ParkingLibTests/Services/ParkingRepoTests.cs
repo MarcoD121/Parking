@@ -15,7 +15,6 @@ namespace ParkingLib.Services.Tests
     [ExcludeFromCodeCoverage]
     public class ParkingRepoTests
     {
-
         private DbContextOptions<ParkingContext> GetInMemoryOptions(string dataBaseName)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ParkingContext>();

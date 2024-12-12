@@ -80,10 +80,18 @@ namespace ParkingRest.Controllers
         [HttpPut("{licenseplate}")]
         public async Task<ActionResult> EndParking(string licenseplate)
         {
+            try
+            {
             var result = await _parkingRepo.EndParking(licenseplate);
             if (result != null)
             {
             return Ok(result);
+            }
+            }
+            catch (KeyNotFoundException ex)
+            {
+
+                return NotFound(ex.Message);
             }
             return NotFound();
         }

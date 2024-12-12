@@ -57,11 +57,16 @@ namespace ParkingRest.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ParkingRequestDTO request)
         {
-            APIClient client = new APIClient();
-            var result = await client.LicensePlateInformationAsync(request.LicensePlate);
             try
             {
-                return Ok(_parkingRepo.CreateParking(result));
+                APIClient client = new APIClient();
+                var result = await client.LicensePlateInformationAsync(request.LicensePlate);
+                if (result != null) 
+                {
+                    var carparked = _parkingRepo.CreateParking(result);
+                    return Ok(carparked);
+                }
+                return BadRequest();
             }
             catch (ArgumentException ex)
             {

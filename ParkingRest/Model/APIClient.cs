@@ -20,7 +20,7 @@ namespace ParkingRest.Model
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
             // Add the X-AUTH-TOKEN header
-            client.DefaultRequestHeaders.Add("X-AUTH-TOKEN", "tbpjbzwav91qhkhmg1agzp0qc0ozzry4"); // Replace with your actual token
+            client.DefaultRequestHeaders.Add("X-AUTH-TOKEN", "lcxt76xbeexm62sufabnv1aj3dgywaii"); // Replace with your actual token
 
             // Get data response
             var response = await client.GetAsync($"/vehicles/{licensePlate}"); // Replace with your actual endpoint

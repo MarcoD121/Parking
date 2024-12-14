@@ -12,7 +12,7 @@ namespace ParkingLib.Services
     /// <summary>
     /// A class containing CRUD logic for managing parkings 
     /// </summary>
-    public class ParkingRepo
+    public class ParkingRepo : IParkingRepo
     {
         /// <summary>
         /// A list of Parked cars
@@ -54,9 +54,9 @@ namespace ParkingLib.Services
                 await connection.OpenAsync();
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
-                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync()) 
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                     {
-                        while (await reader.ReadAsync()) 
+                        while (await reader.ReadAsync())
                         {
                             ParkedVehicle vehicle = ReadParkedVehicle(reader);
                             list.Add(vehicle);
@@ -131,7 +131,7 @@ namespace ParkingLib.Services
                 Color = ParkedObject.Color,
                 NumberOfWheels = ParkedObject.NumberOfWheels,
                 Type = ParkedObject.Type,
-                EndedParked = new TimeForEndedVehicle(ParkedObject.ActiveParked.TimeStarted,DateTime.Now, totaltimeDateTime)
+                EndedParked = new TimeForEndedVehicle(ParkedObject.ActiveParked.TimeStarted, DateTime.Now, totaltimeDateTime)
             };
             _parkingContext.EndedParkedVehicles.Add(EndedObject);
             _parkingContext.ParkedVehicles.Remove(ParkedObject);

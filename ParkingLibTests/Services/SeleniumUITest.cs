@@ -41,7 +41,7 @@ namespace ParkingLibTests.Services
             string actualBtnText = button.Text;
 
             Assert.AreEqual("Login", actualBtnText);
-            TearDown();
+            //TearDown();
 
             //button.Click();
             // Assert.AreEqual(driver.Url, "https://www.selenium.dev/");

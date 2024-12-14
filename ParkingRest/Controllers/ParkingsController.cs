@@ -14,13 +14,13 @@ namespace ParkingRest.Controllers
         /// <summary>
         /// An instance field of the class parkingrepo
         /// </summary>
-        private readonly ParkingRepo _parkingRepo;
+        private readonly IParkingRepo _parkingRepo;
 
         /// <summary>
         /// Constructor creating an instance of the Controller and using dependency injection to get an instance of the parking repo class
         /// </summary>
         /// <param name="parkingRepo">Class parkingrepo</param>
-        public ParkingsController(ParkingRepo parkingRepo)
+        public ParkingsController(IParkingRepo parkingRepo)
         {
             _parkingRepo = parkingRepo;
         }

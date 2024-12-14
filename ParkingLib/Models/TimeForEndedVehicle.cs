@@ -5,22 +5,50 @@ using System.Collections.Generic;
 
 namespace ParkingLib.Models;
 
+/// <summary>
+/// A class containing all the time information for a vehicle that is no longer parked 
+/// </summary>
 public partial class TimeForEndedVehicle
 {
+    /// <summary>
+    /// Unique Id
+    /// </summary>
     public int EndedParkedId { get; set; }
 
+    /// <summary>
+    /// The start time for when the car was initialily parked
+    /// </summary>
     public DateTime TimeStarted { get; set; }
 
+    /// <summary>
+    /// The end time for when the car is no longer parked
+    /// </summary>
     public DateTime TimeEnded { get; set; }
 
+    /// <summary>
+    /// The total time that the car has been parked
+    /// </summary>
     public DateTime TotalTime { get; set; }
 
+    /// <summary>
+    /// A list containing the parked vehicles
+    /// </summary>
     public virtual ICollection<EndedParkedVehicle> EndedParkedVehicles { get; set; } = new List<EndedParkedVehicle>();
 
+    /// <summary>
+    /// A default constructor for the class
+    /// </summary>
     public TimeForEndedVehicle()
     {
         
     }
+
+    /// <summary>
+    /// A constructor for creating an instance of the class with the following parameters
+    /// </summary>
+    /// <param name="timeStarted">The start time for when the car was initialily parked</param>
+    /// <param name="timeEnded">The end time for when the car is no longer parked</param>
+    /// <param name="totalTime">The total time that the car has been parked</param>
     public TimeForEndedVehicle(DateTime timeStarted, DateTime timeEnded, DateTime totalTime)
     {
         TimeStarted = timeStarted;

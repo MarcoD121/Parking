@@ -5,18 +5,38 @@ using System.Collections.Generic;
 
 namespace ParkingLib.Models;
 
+/// <summary>
+/// A class containing the time for when a car is parked
+/// </summary>
 public partial class TimeForParkedVehicle
 {
+    /// <summary>
+    /// Unique ID
+    /// </summary>
     public int ActiveParkedId { get; set; }
 
+    /// <summary>
+    /// The start time for when the car is initially parked
+    /// </summary>
     public DateTime TimeStarted { get; set; }
 
+    /// <summary>
+    /// A list containing the parked cars
+    /// </summary>
     public virtual ICollection<ParkedVehicle> ParkedVehicles { get; set; } = new List<ParkedVehicle>();
 
+    /// <summary>
+    /// A default constructor creating an instance of the class
+    /// </summary>
     public TimeForParkedVehicle()
     {
         
     }
+
+    /// <summary>
+    /// A constructor creating an instance of the class with the following parameters
+    /// </summary>
+    /// <param name="timeStarted">The start time for when the car is initially parked</param>
     public TimeForParkedVehicle(DateTime timeStarted)
     {
         TimeStarted = timeStarted;

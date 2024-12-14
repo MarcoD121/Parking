@@ -8,8 +8,16 @@ using System.Text.Json;
 
 namespace ParkingRest.Model
 {
+    /// <summary>
+    /// A class containing logic for retrieving vehicle information from a third party API
+    /// </summary>
     public class APIClient
     {
+        /// <summary>
+        /// Method for retrieving vehicle information from the third party API - MotorAPI
+        /// </summary>
+        /// <param name="licensePlate">Unique ID for a requested car</param>
+        /// <returns>A ParkedVehicle object containing relevant car information</returns>
         public async Task<ParkedVehicle?> LicensePlateInformationAsync(string licensePlate)
         {
             var client = new HttpClient();

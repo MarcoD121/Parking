@@ -6,31 +6,71 @@ using System.Text.Json.Serialization;
 
 namespace ParkingLib.Models;
 
+/// <summary>
+/// Class connected to db table when a car is parked
+/// </summary>
 public partial class ParkedVehicle
 {
+    /// <summary>
+    /// Unique Id
+    /// </summary>
     public int VehicleId { get; set; }
 
+    /// <summary>
+    /// Unique Id
+    /// </summary>
     public int ActiveParkedId { get; set; }
 
+    /// <summary>
+    /// License plate of the car
+    /// </summary>
     [JsonPropertyName("registration_number")]
     public string LicensePlate { get; set; }
 
+    /// <summary>
+    /// The car manufacture
+    /// </summary>
     public string Make { get; set; }
 
+    /// <summary>
+    /// The model of the car
+    /// </summary>
     public string Model { get; set; }
 
+    /// <summary>
+    /// The color of the car
+    /// </summary>
     public string Color { get; set; }
 
+    /// <summary>
+    /// The model of the car
+    /// </summary>
     public int NumberOfWheels { get; set; }
     public string Type { get; set; }
 
+    /// <summary>
+    /// A class containing time for the parked car
+    /// </summary>
     public virtual TimeForParkedVehicle ActiveParked { get; set; }
 
+    /// <summary>
+    /// Creates an instance of the class with null values
+    /// </summary>
     public ParkedVehicle()
     {
         
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="licensePlate">License plate of the car</param>
+    /// <param name="make">The name of the car manufacture</param>
+    /// <param name="model">The name of the car model</param>
+    /// <param name="color">Color of the car</param>
+    /// <param name="numberOfWheels">Number of wheels on the car</param>
+    /// <param name="type">What type is the car etc. passenger car</param>
+    /// <param name="activeParked">Creates a class containing the time for the parked car</param>
     public ParkedVehicle(string licensePlate, string make, string model, string color, int numberOfWheels, string type , TimeForParkedVehicle activeParked)
     {
         LicensePlate = licensePlate;

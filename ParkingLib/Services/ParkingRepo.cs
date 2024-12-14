@@ -9,24 +9,41 @@ using System.Threading.Tasks;
 
 namespace ParkingLib.Services
 {
+    /// <summary>
+    /// A class containing CRUD logic for managing parkings 
+    /// </summary>
     public class ParkingRepo
     {
+        /// <summary>
+        /// A list of Parked cars
+        /// </summary>
         public List<ParkedVehicle> ActiveParkingList { get; set; }
+
+        /// <summary>
+        /// A instance field of the the class containing the connection to the database
+        /// </summary>
         private ParkingContext _parkingContext;
 
+        /// <summary>
+        /// A default constructor that creates an instance of the class as well as initializing the parking list and db class
+        /// </summary>
         public ParkingRepo()
         {
             ActiveParkingList = new List<ParkedVehicle>();
             _parkingContext = new ParkingContext();
         }
 
-        // Bruges til testing af DB.
+        // Bruges til unittesting af DB.
         public ParkingRepo(ParkingContext parkingContext)
         {
             _parkingContext = parkingContext;
         }
 
 
+        /// <summary>
+        /// Gets a list of all the current parked cars from the database using handwritten SQL queries
+        /// </summary>
+        /// <returns>A list of parked vehicles</returns>
         public async Task<List<ParkedVehicle>> GetActiveParkings()
         {
             List<ParkedVehicle> list = new List<ParkedVehicle>();
@@ -51,6 +68,10 @@ namespace ParkingLib.Services
             return list;
         }
 
+        /// <summary>
+        /// Gets a list of all the vehicles that is no longer parked from the database
+        /// </summary>
+        /// <returns>A list of Ended parked vehicles</returns>
         public async Task<List<EndedParkedVehicle>> GetEndedParkings()
         {
             List<EndedParkedVehicle> list = new List<EndedParkedVehicle>();
@@ -75,6 +96,10 @@ namespace ParkingLib.Services
             return list;
         }
 
+        /// <summary>
+        /// returns a list current parked cars from the database using Entity framework
+        /// </summary>
+        /// <returns>A list of parked vehicles</returns>
         public async Task<List<ParkedVehicle>> GetAllActiveParkings()
         {
             return await _parkingContext.ParkedVehicles.ToListAsync();
@@ -86,6 +111,11 @@ namespace ParkingLib.Services
             return ParkedObject;
         }
 
+        /// <summary>
+        /// Finds a current parked car from a given licenseplate and end its parking. The car is moved from the Active parked list to the endedparked list
+        /// </summary>
+        /// <param name="licenseplate">Unique Id to find a specific car</param>
+        /// <returns>The car the whose parking has ended</returns>
         public async Task<EndedParkedVehicle> EndParking(string licenseplate)
         {
             var ParkedObject = await GetParkingById(licenseplate);
@@ -110,6 +140,12 @@ namespace ParkingLib.Services
             return EndedObject;
         }
 
+        /// <summary>
+        /// Gets a current parked car from a given licenseplate
+        /// </summary>
+        /// <param name="LicensePlate">Unique Id to find a specific car</param>
+        /// <returns>The found car</returns>
+        /// <exception cref="KeyNotFoundException">If no car is found an exception is thrown</exception>
         public async Task<ParkedVehicle> GetParkingById(string LicensePlate)
         {
 
@@ -124,6 +160,12 @@ namespace ParkingLib.Services
 
             return vehicle;
         }
+
+        /// <summary>
+        /// Deletes the parking of an active parked car
+        /// </summary>
+        /// <param name="LicensePlate">Unique Id to find a specific car</param>
+        /// <returns>The deleted car</returns>
         public async Task<ParkedVehicle> DeleteParking(string LicensePlate)
         {
             ParkedVehicle vehicle = await GetParkingById(LicensePlate);
@@ -133,6 +175,11 @@ namespace ParkingLib.Services
             return vehicle;
         }
 
+        /// <summary>
+        /// Helping method for reading a parked vehicle from the database
+        /// </summary>
+        /// <param name="reader">Helper class</param>
+        /// <returns>a parked vehicle object with information from the database</returns>
         private ParkedVehicle ReadParkedVehicle(SqlDataReader reader)
         {
             ParkedVehicle parkedVehicle = new ParkedVehicle();
@@ -151,6 +198,11 @@ namespace ParkingLib.Services
             return parkedVehicle;
         }
 
+        /// <summary>
+        /// Helping method for reading a Endedparked vehicle from the database
+        /// </summary>
+        /// <param name="reader">Helper class</param>
+        /// <returns>an Ended parked vehicle object with information from the database</returns>
         private EndedParkedVehicle ReadEndedParkedVehicle(SqlDataReader reader)
         {
             EndedParkedVehicle endedParkedVehicle = new EndedParkedVehicle();

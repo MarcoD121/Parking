@@ -11,13 +11,24 @@ namespace ParkingRest.Controllers
     [ApiController]
     public class ParkingsController : ControllerBase
     {
+        /// <summary>
+        /// An instance field of the class parkingrepo
+        /// </summary>
         private readonly ParkingRepo _parkingRepo;
+
+        /// <summary>
+        /// Constructor creating an instance of the Controller and using dependency injection to get an instance of the parking repo class
+        /// </summary>
+        /// <param name="parkingRepo">Class parkingrepo</param>
         public ParkingsController(ParkingRepo parkingRepo)
         {
             _parkingRepo = parkingRepo;
         }
 
-        // GET: api/<ParkingsController>
+        /// <summary>
+        /// GET method for retrieving a list of currently parked vehicles
+        /// </summary>
+        /// <returns>A list of currently parked vehicles or a status code notfound</returns>
         [HttpGet("ActiveParkings")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -27,7 +38,10 @@ namespace ParkingRest.Controllers
                 return ListOfActiveParkings.Count() == 0 ? NotFound() : Ok(ListOfActiveParkings);   
         }
 
-        // GET: api/<ParkingsController>
+        /// <summary>
+        /// Get method for retrieving a list of ended parked vehicles
+        /// </summary>
+        /// <returns>A list of ended parked vehicles or a notfound status code</returns>
         [HttpGet("EndedParkings")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -37,7 +51,11 @@ namespace ParkingRest.Controllers
             return ListOfEndedParkings.Count() == 0 ? NotFound() : Ok(ListOfEndedParkings);
         }
 
-        // GET api/<ParkingsController>/5
+        /// <summary>
+        /// Get method for retrieving a single currently parked vehicle
+        /// </summary>
+        /// <param name="licenseplate">Unique ID retrieved from the URI</param>
+        /// <returns>A parked vehicle or a bad request status code with a keynotfound exception</returns>
         [HttpGet("{licenseplate}")]
         public async Task<ActionResult> Get(string licenseplate)
         {
@@ -53,7 +71,11 @@ namespace ParkingRest.Controllers
             }
         }
 
-        // POST api/<ParkingsController>
+        /// <summary>
+        /// Post method for creating a parking for a vehicle
+        /// </summary>
+        /// <param name="request">A DTO containing the licenseplate of the vehicle</param>
+        /// <returns>The parked vehicle object</returns>
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ParkingRequestDTO request)
         {
@@ -76,7 +98,11 @@ namespace ParkingRest.Controllers
 
         }
 
-        // PUT api/<ParkingsController>/5
+        /// <summary>
+        /// Put method for ending af parked vehicle
+        /// </summary>
+        /// <param name="licenseplate">Unique Id retrieved from the URI</param>
+        /// <returns>The ended parked vehicle</returns>
         [HttpPut("{licenseplate}")]
         public async Task<ActionResult> EndParking(string licenseplate)
         {
@@ -96,7 +122,11 @@ namespace ParkingRest.Controllers
             return NotFound();
         }
 
-        // DELETE api/<ParkingsController>/5
+        /// <summary>
+        /// Delete method for deleting a parked vehicle
+        /// </summary>
+        /// <param name="licenseplate">Unique Id retrieved from the URI</param>
+        /// <returns>The deleted parked vehicle</returns>
         [HttpDelete("{licenseplate}")]
         public async Task<ActionResult> Delete(string licenseplate)
         {

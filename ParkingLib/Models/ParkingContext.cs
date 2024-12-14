@@ -6,19 +6,43 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ParkingLib.Models;
 
+/// <summary>
+/// The class that holds the connection to the database
+/// </summary>
 public partial class ParkingContext : DbContext
 {
+    /// <summary>
+    /// The table EndedParkedVehicles in the database
+    /// </summary>
     public virtual DbSet<EndedParkedVehicle> EndedParkedVehicles { get; set; }
 
+    /// <summary>
+    /// The table ParkedVehicles in the database
+    /// </summary>
     public virtual DbSet<ParkedVehicle> ParkedVehicles { get; set; }
 
+    /// <summary>
+    /// The table TimeForEndedVehicles in the database
+    /// </summary>
     public virtual DbSet<TimeForEndedVehicle> TimeForEndedVehicles { get; set; }
 
+    /// <summary>
+    /// The table TimeForParkedVehicles in the database
+    /// </summary>
     public virtual DbSet<TimeForParkedVehicle> TimeForParkedVehicles { get; set; }
+
+    /// <summary>
+    /// Creates a default instance of the class
+    /// </summary>
     public ParkingContext()
     {
 
     }
+
+    /// <summary>
+    /// Create an instance of the class
+    /// </summary>
+    /// <param name="options">adds default options inherited from the base dbcontext containing helping methods</param>
     public ParkingContext(DbContextOptions<ParkingContext> options)
         : base(options)
     {
